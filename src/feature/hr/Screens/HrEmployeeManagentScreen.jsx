@@ -7,28 +7,18 @@ import HrEmployeesManaFirstCard from "../Components/HrEmployeesManaFirstCard";
 import { useHrEmployeeManagentScreenDataHook } from "../Hooks/HrEmployeeManagentScreen.Data.Hook";
 import { useHrEmployeeManagentScreenHook } from "../Hooks/HrEmployeeManagentScreen.hook";
 import HrEmployeeDetailsViewScreen from "./HrEmployeeDetailsViewScreen";
+import { useSelector } from "react-redux";
 
 const HrEmployeeManagentScreen = () => {
-  const {
-    isLoading,
-    error,
-    employees,
-    totalPages,
-    currentPage,
-    status,
-    department,
-    searchText,
-    handlePageClick,
-    searchEmployee,
-    handleSetDepartment,
-    handleSetStatus,
-  } = useHrEmployeeManagentScreenHook();
+  const { employees, totalPages, currentPage, isLoading, error } = useSelector(
+    (state) => state.employeeList
+  );
+
+  const { handlePageClick } = useHrEmployeeManagentScreenHook();
 
   const [toggleUi, setToggleUi] = useState(true);
-  const [singleEmployee, setSingEmployee] = useState(null);
 
   const { columns } = useHrEmployeeManagentScreenDataHook({
-    setSingEmployee,
     setToggleUi,
   });
 
@@ -37,14 +27,7 @@ const HrEmployeeManagentScreen = () => {
       {toggleUi ? (
         <div className="bg-white rounded-md shadow-custom p-4 flex flex-col gap-4">
           <HrEmployeesManaFirstCard />
-          <HrEmployeesFilterCard
-            status={status}
-            department={department}
-            searchText={searchText}
-            searchEmployee={searchEmployee}
-            handleSetDepartment={handleSetDepartment}
-            handleSetStatus={handleSetStatus}
-          />
+          <HrEmployeesFilterCard />
           <StatusWrapper loading={isLoading} error={error}>
             {employees?.length ? (
               <Table
@@ -60,10 +43,7 @@ const HrEmployeeManagentScreen = () => {
           </StatusWrapper>
         </div>
       ) : (
-        <HrEmployeeDetailsViewScreen
-          setToggleUi={setToggleUi}
-          employee={singleEmployee}
-        />
+        <HrEmployeeDetailsViewScreen setToggleUi={setToggleUi} />
       )}
     </>
   );

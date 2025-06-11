@@ -1,5 +1,3 @@
-// LoginScreen.jsx
-import React from "react";
 import { useForm } from "react-hook-form";
 import loginImage from "../../../assets/loging-image.png";
 import Input from "../../../Utils/Input";

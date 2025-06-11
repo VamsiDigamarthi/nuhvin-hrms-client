@@ -2,20 +2,37 @@ import React from "react";
 import Search from "../../../Utils/Search";
 import Select from "../../../Utils/Select";
 import DatePicker from "react-datepicker";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setDepartment,
+  setSearchText,
+  setStatus,
+} from "../Slices/HrEmployeeSlice";
 
-const HrEmployeesFilterCard = ({
-  searchEmployee,
-  handleSetDepartment,
-  handleSetStatus,
-  status,
-  department,
-  searchText,
-}) => {
+const HrEmployeesFilterCard = ({}) => {
+  const dispatch = useDispatch();
+
+  const { searchText, department, status } = useSelector(
+    (state) => state.employeeList
+  );
+
+  const handleSearch = (text) => {
+    dispatch(setSearchText(text));
+  };
+
+  const handleDepartMent = (text) => {
+    dispatch(setDepartment(text));
+  };
+
+  const handleSetStatus = (text) => {
+    dispatch(setStatus(text));
+  };
+
   return (
     <div className="w-full flex justify-between items-center">
       <Search
         anotherStyle="w-[300px]"
-        onChange={(e) => searchEmployee(e.target.value)}
+        onChange={(e) => handleSearch(e.target.value)}
         value={searchText}
       />
       <div className="flex items-center gap-4">
@@ -23,7 +40,7 @@ const HrEmployeesFilterCard = ({
           options={[{ label: "Software", value: "software" }]}
           name="department"
           onChange={(e) => {
-            handleSetDepartment(e.target.value);
+            handleDepartMent(e.target.value);
           }}
           value={department}
           firstOption={"Department"}
