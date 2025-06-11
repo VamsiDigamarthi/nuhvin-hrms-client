@@ -1,9 +1,10 @@
 import { ArrowRight, Mail, Workflow } from "lucide-react";
 import React from "react";
 import Select from "./Select";
+import { useSelector } from "react-redux";
 
-const EmployeeProfileDetails = ({ user, setToggleUi }) => {
-  // console.log("user", user);
+const EmployeeProfileDetails = ({ setToggleUi }) => {
+  const { singleEmployee } = useSelector((state) => state.employeeList);
 
   return (
     <div className="w-[25%] bg-white rounded-md p-4 flex flex-col items-center py-10">
@@ -16,20 +17,22 @@ const EmployeeProfileDetails = ({ user, setToggleUi }) => {
           Back
         </span>
         <span className="w-[80px] h-[80px] bg-gray-400 rounded-full"></span>
-        <h2 className="text-lg font-bold font-sans ">{user?.name}</h2>
-        <span className="text-base font-normal ">{user?.empId}</span>
+        <h2 className="text-lg font-bold font-sans ">{singleEmployee?.name}</h2>
+        <span className="text-base font-normal ">{singleEmployee?.empId}</span>
         <span className="px-4 py-1 rounded-md bg-red-200 text-white">
-          {user?.status}
+          {singleEmployee?.status}
         </span>
       </div>
       <div className="border-b border-b-gray-400 pb-4 w-full flex flex-col gap-1 py-4">
         <div className="w-full flex items-center gap-4">
           <Workflow size={20} color="gray" />
-          <span className="text-lg font-semibold">{user?.designation}</span>
+          <span className="text-lg font-semibold">
+            {singleEmployee?.designation}
+          </span>
         </div>
         <div className="w-full flex items-center gap-4">
           <Mail size={20} color="gray" />
-          <span className="text-lg font-semibold">{user?.email}</span>
+          <span className="text-lg font-semibold">{singleEmployee?.email}</span>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4">
@@ -43,7 +46,9 @@ const EmployeeProfileDetails = ({ user, setToggleUi }) => {
           <span className="text-sm font-sans font-semibold text-[#C4C4C4]">
             Employee ID
           </span>
-          <h3 className="text-lg font-sans font-semibold">{user?.empId}</h3>
+          <h3 className="text-lg font-sans font-semibold">
+            {singleEmployee?.empId}
+          </h3>
         </div>
         <div className="w-full flex items-center gap-2">
           <span className="w-[50px] h-[50px] bg-gray-400 rounded-full"></span>

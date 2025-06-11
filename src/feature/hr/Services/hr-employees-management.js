@@ -37,3 +37,46 @@ export const getEmployees = async ({
     };
   }
 };
+
+export const addNewEmployeeApi = async ({ token, apiData }) => {
+  try {
+    await API.post(`/hr/employees`, apiData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return {
+      status: true,
+    };
+  } catch (error) {
+    let errMsg = error?.response?.data?.message || "Failed to Add Employees";
+    errorMsgApi(errMsg);
+    return {
+      status: false,
+      errMsg,
+    };
+  }
+};
+
+export const updateEmployeeProfile = async (id, payload, token) => {
+  try {
+    const { data } = await API.put(
+      `/hr/employees/${id}`, // or your actual endpoint
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { status: true, apiRes: data };
+  } catch (error) {
+    errorMsgApi(error.response?.data?.message || "Failed to Update");
+
+    return {
+      status: false,
+      errMsg: error.response?.data?.message || error.message,
+    };
+  }
+};

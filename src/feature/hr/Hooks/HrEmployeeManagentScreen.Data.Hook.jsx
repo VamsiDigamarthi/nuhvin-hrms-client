@@ -1,12 +1,12 @@
 import { Eye } from "lucide-react";
+import { setSingleEmployee } from "../Slices/HrEmployeeSlice";
+import { useDispatch } from "react-redux";
 
-export const useHrEmployeeManagentScreenDataHook = ({
-  setSingEmployee,
-  setToggleUi,
-}) => {
+export const useHrEmployeeManagentScreenDataHook = ({ setToggleUi }) => {
+  const dispatch = useDispatch();
   const handleSelectEmp = (emp) => {
     setToggleUi(false);
-    setSingEmployee(emp);
+    dispatch(setSingleEmployee(emp));
   };
 
   const columns = [
@@ -14,13 +14,13 @@ export const useHrEmployeeManagentScreenDataHook = ({
       name: "Employee Name",
       width: "20%",
       render: (row) => (
-        <div className="w-full flex items-center gap-1">
+        <div className="w-full flex items-center gap-1 overflow-hidden">
           <span className="w-[45px] h-[45px] rounded-full bg-gray-500"></span>
-          <div className="w-[80%] flex ">
+          <div className="w-[75%] flex flex-col">
             <span className="text-base font-sans font-semibold">
               {row?.name}
             </span>
-            <span>{row?.email}</span>
+            <span className="-mt-1 text-[11px]">{row?.email}</span>
           </div>
         </div>
       ),
