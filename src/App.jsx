@@ -11,10 +11,11 @@ import EmpLeavesScreen from "./feature/employee/Screens/EmpLeavesScreen";
 import LeavesManagementScreen from "./feature/hr/Screens/LeavesManagementScreen";
 import HrLayout from "./Layout/HrLayout";
 import HrEmployeeManagentScreen from "./feature/hr/Screens/HrEmployeeManagentScreen";
+import SignupScreen from "./feature/auth/Screens/SignupScreen";
 
 function App() {
   return (
-    <div className="flex flex-col w-full h-[100vh] overflow-hidden">
+    <div className="flex flex-col w-full  overflow-hidden">
       <ToastContainer
         position="top-right"
         autoClose={5000} // 5 seconds
@@ -28,6 +29,10 @@ function App() {
       />
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
+        <Route
+          path="/signup/:empId/:email/:designation"
+          element={<SignupScreen />}
+        />
         <Route element={<ProtectedRoute allowedRoles={["Hr"]} />}>
           <Route element={<HrLayout />}>
             <Route path="/hr-dashboard" element={<HrDashboard />} />
