@@ -1,47 +1,76 @@
-import React from "react";
 import { useEmpPayslipScreenHook } from "../Hooks/EmpPayslipScreen.Hook";
-import Select from "../../../Utils/Select";
-import IconButton from "../../../Utils/IconButon";
-import { Download, Plus, Trash2 } from "lucide-react";
 import EmpPayslipEmpDetails from "../Components/EmpPayslipEmpDetails";
 import Table from "../../../Utils/Table/Table";
 import { useEmpPayslipScreenDataHook } from "../Hooks/EmpPayslipScreen.Hook.data";
+import HrPayrollFilters from "../../hr/Components/HrPayrollFilters";
+import StatusWrapper from "../../../Utils/StatusWrapper";
+import NoDate from "../../../Utils/NoDate";
+import { useState } from "react";
+import PayslipSheet from "../Components/PayslipSheet";
 
 export const EmpPayslipScreen = () => {
-  const { monthOptions, selectedMonth, handleMonthChange } =
-    useEmpPayslipScreenHook();
+  const {
+    loading,
+    error,
+    totalPages,
+    currentPage,
+    month,
+    payroll,
+    setMonth,
+    handlePageClick,
+    setStatus,
+    status,
+  } = useEmpPayslipScreenHook();
+  const [toggleUi, setToggleUi] = useState("table");
+  const [singlePayroll, setSinglePayroll] = useState({});
 
-  const { columns } = useEmpPayslipScreenDataHook();
+  const { columns } = useEmpPayslipScreenDataHook({
+    setToggleUi,
+    setSinglePayroll,
+  });
 
   return (
-    <div className="w-full shadown-custom rounded-md p-6 bg-white flex flex-col gap-4">
-      <div className="w-full flex justify-between items-center">
-        <div>
-          <h2 className="text-lg font-sans font-semibold">
-            Pay Slip Management
-          </h2>
-          <span className="text-sm font-sans font-normal text-gray-400">
-            Last 3 Months
-          </span>
+    <>
+      {toggleUi === "table" && (
+        <div className="w-full shadown-custom rounded-md p-6 bg-white flex flex-col gap-4">
+          <div className="w-full flex justify-between items-center">
+            <div>
+              <h2 className="text-lg font-sans font-semibold">
+                Pay Slip Management
+              </h2>
+              <span className="text-sm font-sans font-normal text-gray-400">
+                Last 3 Months
+              </span>
+            </div>
+            <HrPayrollFilters
+              setMonth={setMonth}
+              width="w-[35%]"
+              isDisplaySeach={false}
+              month={month}
+              setStatus={setStatus}
+              status={status}
+            />
+          </div>
+          <EmpPayslipEmpDetails />
+          <StatusWrapper loading={loading} error={error}>
+            {payroll?.length ? (
+              <Table
+                data={payroll}
+                columns={columns}
+                currentPage={currentPage}
+                handlePageClick={handlePageClick}
+                totalPages={totalPages}
+              />
+            ) : (
+              <NoDate />
+            )}
+          </StatusWrapper>
         </div>
-        <div className="flex gap-4 items-center-">
-          <Select
-            value={selectedMonth}
-            onChange={handleMonthChange}
-            options={monthOptions}
-            firstOption={"Month"}
-            width="w-[250px]"
-          />
-          <IconButton
-            icon={<Download size={16} />}
-            text="Download PDF"
-            // onClick={handleClick}
-          />
-        </div>
-      </div>
-      <EmpPayslipEmpDetails />
-      <Table columns={columns} />
-    </div>
+      )}
+      {toggleUi === "PaySlip" && (
+        <PayslipSheet setToggleUi={setToggleUi} singlePayroll={singlePayroll} />
+      )}
+    </>
   );
 };
 

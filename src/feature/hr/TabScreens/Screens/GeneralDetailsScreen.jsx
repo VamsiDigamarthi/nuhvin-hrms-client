@@ -5,6 +5,7 @@ import Drawer from "../../../../Utils/Drawer";
 import { useGeneralDetailsScreenHook } from "../Hooks/GeneralDetailsScreen.Hook";
 import EmpPersonalDetailsEdit from "../Components/EmpPersonalDetailsEdit";
 import EmpPersonalAddressEdit from "../Components/EmpPersonalAddressEdit";
+import EmpEmergancyDetailsEdit from "../Components/EmpEmergancyDetailsEdit";
 
 const GeneralDetailsScreen = () => {
   const {
@@ -55,14 +56,14 @@ const GeneralDetailsScreen = () => {
         onClose={handleEditAddressInfo}
         anotherStyles="w-[30%]"
       >
-        <EmpPersonalAddressEdit />
+        <EmpPersonalAddressEdit handleEditAddress={handleEditAddressInfo} />
       </Drawer>
       <Drawer
         isOpen={isOpenEmerContDrawer}
         onClose={handleEditEmerConInfo}
-        anotherStyles="w-[45%]"
+        anotherStyles="w-[30%]"
       >
-        <p>emetgenncy</p>
+        <EmpEmergancyDetailsEdit handleEditEmergency={handleEditEmerConInfo} />
       </Drawer>
     </>
   );
@@ -70,7 +71,7 @@ const GeneralDetailsScreen = () => {
 
 export default GeneralDetailsScreen;
 
-const TwoColumnDetails = ({ data = [] }) => {
+export const TwoColumnDetails = ({ data = [] }) => {
   return (
     <div className="w-full flex gap-4">
       {[0, 1].map((col) => (
@@ -84,7 +85,7 @@ const TwoColumnDetails = ({ data = [] }) => {
   );
 };
 
-const SingleColumnDetails = ({ data = [] }) => {
+export const SingleColumnDetails = ({ data = [] }) => {
   return (
     <div className="w-[50%] flex flex-col gap-2">
       {data.map((item, idx) => (

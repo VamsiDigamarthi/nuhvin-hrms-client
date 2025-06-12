@@ -33,19 +33,20 @@ export const useHrEmployeeManagentScreenDataHook = ({ setToggleUi }) => {
     {
       name: "Job Title",
       width: "20%",
-      render: (row) => <p>{row?.jobTitle ?? "-"}</p>,
+      render: (row) => <p>{row?.jobTimeline?.[0]?.jobTitle ?? "-"}</p>,
     },
     {
       name: "Department",
       width: "20%",
-      render: (row) => <p>{row?.department ?? "-"}</p>,
+      render: (row) => <p>{row?.jobTimeline?.[0]?.positionType ?? "-"}</p>,
     },
     {
       name: "Shift Timings",
       width: "10%",
       render: (row) => (
         <p>
-          {row.shiftTimmings?.startTime} - {row.shiftTimmings?.endTime}
+          {row?.jobTimeline?.[0]?.shiftTimmings?.startTime} {"-"}
+          {row?.jobTimeline?.[0]?.shiftTimmings?.endTime}
         </p>
       ),
     },

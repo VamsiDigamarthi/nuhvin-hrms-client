@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import HrLeavesCardCount from "../Components/HrLeavesCardCount";
 import HrLeavesFilter from "../Components/HrLeavesFilter";
 import Table from "../../../Utils/Table/Table";

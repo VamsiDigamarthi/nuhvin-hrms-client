@@ -33,7 +33,7 @@ export const useLeavesManagementHook = () => {
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
-    // fetchContact({ page: event.selected + 1 });
+    fetchLeaves({ page: event.selected + 1 });
   };
 
   useEffect(() => {

@@ -67,12 +67,13 @@ const LoginScreen = () => {
             />
             {error && <p className="text-sm text-red-600 font-sans">{error}</p>}
             <Button
-              text="Create Account"
               bgColor="bg-orange"
               textColor="text-white"
               type="submit"
               loading={loading}
-            />
+            >
+              Create Account
+            </Button>
           </form>
         </div>
       </div>

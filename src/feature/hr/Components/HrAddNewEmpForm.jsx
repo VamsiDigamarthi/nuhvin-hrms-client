@@ -22,7 +22,22 @@ const HrAddNewEmpForm = ({ handleOpenDrawerForNewEmp }) => {
   const onSubmit = async (data) => {
     const formattedData = {
       ...data,
-      dob: data?.dob ? data?.dob?.toISOString().split("T")[0] : null,
+      jobTimeline: [
+        {
+          effectiveDate: data?.dob
+            ? data?.dob?.toISOString().split("T")[0]
+            : null,
+          jobTitle: data?.jobTitle,
+          positionType: data?.department,
+          seatNo: data?.seatNumber,
+          location: "",
+          employmentType: "",
+          shiftTimmings: {
+            startTime: "",
+            endTime: "",
+          },
+        },
+      ],
     };
 
     const resData = await addNewEmployeeApi({ apiData: formattedData, token });
@@ -115,7 +130,7 @@ const HrAddNewEmpForm = ({ handleOpenDrawerForNewEmp }) => {
               dateFormat="yyyy-MM-dd"
               className="w-[370px] border px-3 py-2 rounded-md"
               placeholderText="Select Join Date"
-              minDate={new Date()}
+              // minDate={new Date()}
             />
           )}
         />

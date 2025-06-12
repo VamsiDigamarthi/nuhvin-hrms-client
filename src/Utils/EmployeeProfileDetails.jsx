@@ -23,16 +23,18 @@ const EmployeeProfileDetails = ({ setToggleUi }) => {
           {singleEmployee?.status}
         </span>
       </div>
-      <div className="border-b border-b-gray-400 pb-4 w-full flex flex-col gap-1 py-4">
+      <div className="border-b border-b-gray-400 pb-4 w-full flex flex-col gap-1 py-4 overflow-hidden">
         <div className="w-full flex items-center gap-4">
           <Workflow size={20} color="gray" />
-          <span className="text-lg font-semibold">
+          <span className="text-base font-semibold">
             {singleEmployee?.designation}
           </span>
         </div>
         <div className="w-full flex items-center gap-4">
           <Mail size={20} color="gray" />
-          <span className="text-lg font-semibold">{singleEmployee?.email}</span>
+          <span className="text-base font-semibold">
+            {singleEmployee?.email}
+          </span>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4">
