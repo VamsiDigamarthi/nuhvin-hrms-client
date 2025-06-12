@@ -38,6 +38,11 @@ const SidebarMenu = () => {
         label="Leavs"
         to="/hr-leave-management"
       />
+      <MenuItem
+        icon={<Leaf size={18} />}
+        label="Payroll Management"
+        to="/hr-payroll-management"
+      />
     </div>
   );
 };

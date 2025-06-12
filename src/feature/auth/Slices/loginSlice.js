@@ -11,7 +11,7 @@ const initialState = {
 export const userLogin = createAsyncThunk(
   "auth/login",
   async (formData, { rejectWithValue }) => {
-    console.log(formData, "formData");
+    // console.log(formData, "formData");
 
     try {
       const response = await API.post("/auth/login", formData);

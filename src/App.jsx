@@ -11,6 +11,7 @@ import EmpLeavesScreen from "./feature/employee/Screens/EmpLeavesScreen";
 import LeavesManagementScreen from "./feature/hr/Screens/LeavesManagementScreen";
 import HrLayout from "./Layout/HrLayout";
 import HrEmployeeManagentScreen from "./feature/hr/Screens/HrEmployeeManagentScreen";
+import HrPayrollList from "./feature/hr/Screens/HrPayrollList";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               path="/employees-details"
               element={<HrEmployeeManagentScreen />}
             />
+            <Route path="/hr-payroll-management" element={<HrPayrollList />} />
           </Route>
         </Route>
         <Route element={<ProtectedRoute allowedRoles={["Employee"]} />}>

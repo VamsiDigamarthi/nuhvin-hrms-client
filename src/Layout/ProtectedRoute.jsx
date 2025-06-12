@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
+import { userProfile } from "../feature/auth/Slices/profileSlice";
 
 const useGetUserRole = () => {
   const role = localStorage.getItem("role");
@@ -27,7 +28,7 @@ export const ProtectedRoute = ({ allowedRoles }) => {
 
   useEffect(() => {
     if (storedToken && userRole) {
-      //   dispatch(fetchUserProfile());
+      dispatch(userProfile(storedToken));
     }
   }, [storedToken, userRole, dispatch]);
 
